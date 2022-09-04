@@ -1,0 +1,64 @@
+<head>
+	<title>Liverpool CompSoc</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<script src="https://kit.fontawesome.com/9d0c4fc091.js" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+</head>
+<body>
+	<main>
+	  <header>
+		<img src="{{ url_for('static', filename='logo.jpg') }}" alt="CompSoc Logo" />
+		<h3>COMPSOC</h3>
+		<span>Liverpool's largest Computer Science society</i></span>
+	  </header>
+	  <nav class="main-nav">
+        <h3>Links</h3><br>
+		<ul>
+			{% for link in links %}
+		  <li>
+			<a href="{{link['link']}}">
+				{% if link["featured"] == 1 %}
+			  	<div id="featured" class="info-card">
+				{% else %}
+				<div class="info-card">
+				{% endif %}
+				<div class="icon-box"><i class="{{link['icon']}}"></i></div>
+				<div>
+				  <h5>{{link['title']}}</h5>
+				  <span>{{link['description']}}</span>
+				</div>
+			  </div>
+			</a>
+          </li>
+		{% endfor %}
+		</ul>
+         
+        <br><h3>Events</h3>
+        <br>
+		  {% if events == [] %}
+        <span>CompSoc is not hosting any events right now</span> <br>
+		  {% else %}
+		<ul>
+			{% for event in events %}
+		  <li>
+			<a href="{{event['link']}}">
+				{% if event["featured"] == 1 %}
+			  	<div id="featured" class="info-card">
+				{% else %}
+				<div class="info-card">
+				{% endif %}
+				<div class="icon-box"><i class="fa-regular fa-calendar"></i></div>
+				<div>
+				  <h5>{{event['date']}}</h5>
+				  <span>{{event['description']}}</span>
+				</div>
+			  </div>
+			</a>
+          </li>
+		{% endfor %}
+		</ul>
+		  {% endif %}
+        <br>
+	  </nav>
+	</main>
+</body>
